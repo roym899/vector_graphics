@@ -7,7 +7,6 @@
 #include <vector>
 #include <sstream>
 #include <filesystem>
-#include <boost/format.hpp>
 
 #include "Polygon.hpp"
 

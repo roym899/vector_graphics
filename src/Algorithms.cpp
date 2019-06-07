@@ -3,8 +3,8 @@
 
 namespace vectorgraphics {
   namespace algorithms {
-    bool LineSegmentIntersection2D(const LineSegment2D& lineSegment1, const LineSegment2D& lineSegment2, Point2D& intersectionPoint) {
-    }
+    // void LineSegmentIntersection2D(const LineSegment2D& lineSegment1, const LineSegment2D& lineSegment2, Point2D& intersectionPoint) {
+    // }
   }
 }
 
