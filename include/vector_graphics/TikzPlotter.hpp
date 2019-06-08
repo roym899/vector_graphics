@@ -5,6 +5,7 @@
 
 // STL
 #include <vector>
+#include <string>
 #include <sstream>
 #include <filesystem>
 
@@ -15,8 +16,11 @@ namespace vectorgraphics {
   class TikzPlotter {
   public:
     void addPolygon(const Polygon2D& polygon_2d);
-    void makePDF(std::filesystem::path path);
+    void makePDF(std::filesystem::path path, std::string name);
   private:
+    bool createTexFile(std::filesystem::path tex_path) const;
+    bool compileTexFile(std::filesystem::path path, std::string name) const;
+    static bool cleanup(std::filesystem::path path, std::string name);
     std::stringstream content;
   };
 

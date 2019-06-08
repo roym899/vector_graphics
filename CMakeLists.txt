@@ -6,4 +6,4 @@ project(VectorGraphics VERSION 1.0
 
 
 add_subdirectory(src)
-add_subdirectory(apps)
+add_subdirectory(demos)

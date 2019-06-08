@@ -1,4 +1,0 @@
-# Defining the example app
-add_executable(vector_graphics_app main.cpp)
-target_link_libraries(vector_graphics_app PUBLIC vector_graphics_lib)
-target_compile_features(vector_graphics_app PUBLIC cxx_std_17)
