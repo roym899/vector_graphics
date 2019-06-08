@@ -8,24 +8,27 @@
 
 // vectorgraphics
 #include "LineSegment.hpp"
+#include "Primitive.hpp"
 
 namespace vectorgraphics {
 
-  class Polygon2D {
+  class Polygon2D : public Primitive {
   public:
     void add_point();
     double area() const;
+    std::vector<std::shared_ptr<LineSegment2D>>& getLineSegmentPtrs() { return lineSegmentPtrs; };
   private:
-    std::vector<LineSegment2D> lineSegments;
+    std::vector<std::shared_ptr<LineSegment2D>> lineSegmentPtrs;
   };
 
 
-  class Polygon3D {
+  class Polygon3D : public Primitive {
   public:
     void add_point();
     double area() const;
+    std::vector<std::shared_ptr<LineSegment3D>>& getLineSegmentPtrs() { return lineSegmentPtrs; };
   private:
-    std::vector<LineSegment3D> lineSegments;
+    std::vector<std::shared_ptr<LineSegment3D>> lineSegmentPtrs;
   };
 }
 
