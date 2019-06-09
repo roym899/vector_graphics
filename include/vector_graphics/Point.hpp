@@ -14,9 +14,13 @@ namespace vectorgraphics {
   /// \brief A point in 2D space.
   class Point2D : public Primitive {
   public:
-    double x, y;
+    Point2D(double x, double y) 
+      : x_(x), y_(y) {}
+    double x_, y_;
   };
   typedef std::shared_ptr<Point2D> Point2DPtr;
+
+  std::ostream& operator<<(std::ostream &out, const Point2D &point_2d);
 
   ///////////////////////////////////////////////////////////////////////////////
   /// \brief A point in 3D space.

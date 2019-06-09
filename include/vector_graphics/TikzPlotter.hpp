@@ -16,6 +16,8 @@ namespace vectorgraphics {
   class TikzPlotter {
   public:
     void addPolygon(const Polygon2D& polygon_2d);
+    void addLineSegment(const LineSegment2D &line_segment_2d);
+    void addPoint(const Point2D &point_2d);
     void makePDF(std::filesystem::path path, std::string name);
   private:
     bool createTexFile(std::filesystem::path tex_path) const;

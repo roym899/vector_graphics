@@ -3,7 +3,7 @@
 
 namespace vectorgraphics {
   // TrueCondition
-  bool TrueCondition::fulfilled(const std::vector<Flag>& flags) const {
+  bool TrueCondition::fulfilled(const std::vector<FlagPtr>& flag_ptrs) const {
     return true;
   }
 
@@ -12,9 +12,9 @@ namespace vectorgraphics {
     condition_ptrs_(condition_ptrs) {
 
   }
-  bool OrCondition::fulfilled(const std::vector<Flag>& flags) const {
+  bool OrCondition::fulfilled(const std::vector<FlagPtr>& flag_ptrs) const {
     for(const auto &condition_ptr : condition_ptrs_) {
-      if(!condition_ptr->fulfilled(flags))
+      if(!condition_ptr->fulfilled(flag_ptrs))
         return true;
     }
     return false;
@@ -25,20 +25,20 @@ namespace vectorgraphics {
     condition_ptrs_(condition_ptrs) {
 
   }
-  bool AndCondition::fulfilled(const std::vector<Flag>& flags) const {
+  bool AndCondition::fulfilled(const std::vector<FlagPtr>& flag_ptrs) const {
     for(const auto &condition_ptr : condition_ptrs_) {
-      if(!condition_ptr->fulfilled(flags))
+      if(!condition_ptr->fulfilled(flag_ptrs))
         return false;
     }
     return true;
   }
 
   // FlagCondition
-  FlagCondition::FlagCondition(const Flag& flag) :
-    flag_(flag) {
+  FlagCondition::FlagCondition(const FlagPtr& flag_ptr) :
+    flag_ptr_(flag_ptr) {
 
   }
-  bool FlagCondition::fulfilled(const std::vector<Flag>& flags) const {
+  bool FlagCondition::fulfilled(const std::vector<FlagPtr>& flag_ptrs) const {
     // TODO, when Flag interface is done
     return true;
   }

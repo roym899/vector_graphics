@@ -11,6 +11,40 @@
 namespace vectorgraphics
 {
   void TikzPlotter::addPolygon(const Polygon2D &polygon_2d) {
+    // first add the polygon
+
+    // and then the outline
+
+  }
+
+  void TikzPlotter::addLineSegment(const LineSegment2D &line_segment_2d) {
+    // first add the line
+
+    // next add the endpoints
+  }
+
+  void TikzPlotter::addPoint(const Point2D &point_2d) {
+    // relevant keys for points
+    StyleMap style_map;
+
+    // check which styles apply
+    for(const auto& style_ptr : point_2d.style_ptrs) {
+      if(style_ptr->conditionFulfilled(point_2d.flag_ptrs)) {
+        style_ptr->applyStyle(style_map);
+      }
+    }
+
+    // add the point based on style_map final state
+    if(style_map.find("draw") != style_map.end() || style_map.find("fill") != style_map.end()) {
+      content << R"(\path[)" 
+        << getStyleMapString(style_map, {"draw", "draw opacity", "fill", "fill opacity", "line width", "*point_path"})
+        << "] " 
+        << point_2d 
+        << "circle [" 
+        << getStyleMapString(style_map, {"radius", "*point_circle"})
+        << "];" 
+        << std::endl;
+    }
   }
 
   void TikzPlotter::makePDF(std::filesystem::path path, std::string name) {
@@ -43,9 +77,8 @@ namespace vectorgraphics
 
     ofs << R"(\documentclass[]{standalone})" << std::endl;
     ofs << R"(\usepackage[subpreambles=true]{standalone})" << std::endl;
+    ofs << R"(\usepackage{tikz})" << std::endl;
     ofs << R"(\begin{document})" << std::endl;
-
-    ofs << R"(test)" << std::endl;
 
     if (content.str().size() != 0) {
       ofs << R"(\begin{tikzpicture})" << std::endl;
@@ -62,7 +95,7 @@ namespace vectorgraphics
 
   bool TikzPlotter::compileTexFile(std::filesystem::path path, std::string name) const {
     std::ostringstream oss;
-    oss << "cd " << path << " && lualatex --halt-on-error " << path / (name + ".tex") << ">/dev/null";
+    oss << "cd " << path << " && lualatex --halt-on-error " << (name + ".tex") << ">/dev/null";
     auto ret = std::system(oss.str().c_str());
     if (ret != 0) {
       std::cout << "Error in compileTexFile: lualatex call not succesful" << std::endl;

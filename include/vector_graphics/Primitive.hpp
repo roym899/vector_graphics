@@ -9,7 +9,7 @@
 
 // vector_graphics
 // #include "Flag.hpp"
-// #include "Style.hpp"
+#include "Style.hpp"
 
 namespace vectorgraphics {
   class Primitive;
@@ -17,8 +17,8 @@ namespace vectorgraphics {
 
   class Primitive {
   public:
-    // std::vector<std::shared_ptr<Flag>> flags_;
-    // std::vector<std::shared_ptr<Style>> styles_;
+    std::vector<FlagPtr> flag_ptrs;
+    std::vector<StylePtr> style_ptrs;
     std::vector<PrimitivePtr> sub_primitive_ptrs_;
   };
 }
