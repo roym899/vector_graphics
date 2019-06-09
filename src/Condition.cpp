@@ -39,7 +39,7 @@ namespace vectorgraphics {
 
   }
   bool FlagCondition::fulfilled(const std::vector<Flag>& flags) const {
-    // TODO
+    // TODO, when Flag interface is done
     return true;
   }
 }

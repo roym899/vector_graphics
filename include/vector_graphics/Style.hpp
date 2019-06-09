@@ -14,13 +14,13 @@
 namespace vectorgraphics {
   class Style {
   public:
-    Style();
-    Style(const std::map<std::string, std::string> styleMap, std::shared_ptr<Condition> condition_ptr=nullptr);
+    Style(const std::map<std::string, std::string>& style_map={}, ConditionPtr condition_ptr=nullptr);
     void addKeyValue(std::string key, std::string value);
-    void setCondition(std::shared_ptr<Condition> condition_ptr);
+    void setCondition(ConditionPtr condition_ptr);
+    bool conditionFulfilled(const std::vector<Flag> flags) const;
   private:
-    std::shared_ptr<Condition> condition_ptr_;
-    std::map<std::string, std::string> styleMap;
+    ConditionPtr condition_ptr_;
+    std::map<std::string, std::string> style_map_;
   };
 }
 
