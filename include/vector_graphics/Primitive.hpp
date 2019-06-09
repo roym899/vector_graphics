@@ -12,11 +12,14 @@
 // #include "Style.hpp"
 
 namespace vectorgraphics {
+  class Primitive;
+  typedef std::shared_ptr<Primitive> PrimitivePtr;
+
   class Primitive {
   public:
     // std::vector<std::shared_ptr<Flag>> flags_;
     // std::vector<std::shared_ptr<Style>> styles_;
-    std::vector<std::shared_ptr<Primitive>> sub_primitives_;
+    std::vector<PrimitivePtr> sub_primitive_ptrs_;
   };
 }
 

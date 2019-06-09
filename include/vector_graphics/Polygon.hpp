@@ -16,9 +16,9 @@ namespace vectorgraphics {
   public:
     void add_point();
     double area() const;
-    std::vector<std::shared_ptr<LineSegment2D>>& getLineSegmentPtrs() { return lineSegmentPtrs; };
+    std::vector<LineSegment2DPtr>& getLineSegmentPtrs() { return line_segment_ptrs_; };
   private:
-    std::vector<std::shared_ptr<LineSegment2D>> lineSegmentPtrs;
+    std::vector<LineSegment2DPtr> line_segment_ptrs_;
   };
 
 
@@ -26,9 +26,9 @@ namespace vectorgraphics {
   public:
     void add_point();
     double area() const;
-    std::vector<std::shared_ptr<LineSegment3D>>& getLineSegmentPtrs() { return lineSegmentPtrs; };
+    std::vector<LineSegment3DPtr>& getLineSegmentPtrs() { return line_segment_ptrs_; };
   private:
-    std::vector<std::shared_ptr<LineSegment3D>> lineSegmentPtrs;
+    std::vector<LineSegment3DPtr> line_segment_ptrs_;
   };
 }
 

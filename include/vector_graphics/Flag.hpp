@@ -5,12 +5,14 @@
 
 // STL
 #include <string>
+#include <memory>
 
 namespace vectorgraphics {
   class Flag {
   public:
   private:
   };
+  typedef std::shared_ptr<Flag> FlagPtr;
 }
 
 #endif
