@@ -26,7 +26,9 @@ namespace vectorgraphics {
   /// \brief A point in 3D space.
   class Point3D : public Primitive {
   public:
-    double x, y, z;
+    Point3D(double x, double y, double z) 
+      : x_(x), y_(y), z_(z) {}
+    double x_, y_, z_;
   };
   typedef std::shared_ptr<Point3D> Point3DPtr;
 }

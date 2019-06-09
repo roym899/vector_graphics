@@ -19,12 +19,34 @@ namespace vectorgraphics
 
   void TikzPlotter::addLineSegment(const LineSegment2D &line_segment_2d) {
     // first add the line
+    StyleMap style_map;
+
+    // check which styles apply
+    for(const auto& style_ptr : line_segment_2d.style_ptrs) {
+      if(style_ptr->conditionFulfilled(line_segment_2d.flag_ptrs)) {
+        style_ptr->applyStyle(style_map);
+      }
+    }
+
+
+    // add the line based on style_map final state
+    if(style_map.find("draw") != style_map.end() || style_map.find("fill") != style_map.end()) {
+      content << R"(\path[)" 
+        << getStyleMapString(style_map, {"draw", "draw opacity", "fill", "fill opacity", "line width", "line cap", "dash pattern", "*line_path"})
+        << "] " 
+        << *line_segment_2d.start_ptr_ 
+        << " -- " 
+        << *line_segment_2d.end_ptr_
+        << ";"
+        << std::endl;
+    }
 
     // next add the endpoints
+    addPoint(*line_segment_2d.start_ptr_);
+    addPoint(*line_segment_2d.end_ptr_);
   }
 
   void TikzPlotter::addPoint(const Point2D &point_2d) {
-    // relevant keys for points
     StyleMap style_map;
 
     // check which styles apply

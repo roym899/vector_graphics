@@ -26,11 +26,16 @@ int main() {
   p2.style_ptrs.push_back(std::make_shared<vg::Style>(vg::StyleMap{{"draw","blue"},{"fill","blue"},{"radius","1pt"}}));
   p3.style_ptrs.push_back(std::make_shared<vg::Style>(vg::StyleMap{{"draw","green"},{"fill","green"},{"radius","1pt"}}));
 
+  // a dashed line segment
+  vg::LineSegment2D line1(0.25,0.25,0.75,0.75);
+  line1.style_ptrs.push_back(std::make_shared<vg::Style>(vg::StyleMap{{"draw","red"},{"*line_path","dashed"}}));
+
   // Create the file
   vg::TikzPlotter tp;
   tp.addPoint(p1);
   tp.addPoint(p2);
   tp.addPoint(p3);
+  tp.addLineSegment(line1);
   tp.makePDF("./demos_output", "demo_pdf");
   return 0; 
 }
