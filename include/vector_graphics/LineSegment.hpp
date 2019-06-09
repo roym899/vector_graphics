@@ -31,7 +31,7 @@ namespace vectorgraphics {
     LineSegment3D(double start_x, double start_y, double start_z, double end_x, double end_y, double end_z);
     Point3DPtr start_ptr_, end_ptr_;
   };
-  typedef std::shared_ptr<LineSegment2D> LineSegment3DPtr;
+  typedef std::shared_ptr<LineSegment3D> LineSegment3DPtr;
 }
 
 #endif

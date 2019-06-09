@@ -12,9 +12,31 @@ namespace vectorgraphics
 {
   void TikzPlotter::addPolygon(const Polygon2D &polygon_2d) {
     // first add the polygon
+    StyleMap style_map;
+
+    // check which styles apply
+    for(const auto& style_ptr : polygon_2d.style_ptrs) {
+      if(style_ptr->conditionFulfilled(polygon_2d.flag_ptrs)) {
+        style_ptr->applyStyle(style_map);
+      }
+    }
+
+    // add the polygon based on style_map final state
+    if(style_map.find("draw") != style_map.end() || style_map.find("fill") != style_map.end()) {
+      content << R"(\path[)" 
+        << getStyleMapString(style_map, {"draw", "draw opacity", "fill", "fill opacity", "line width", "line cap", "dash pattern", "*polygon_path"})
+        << "] ";
+      
+      for(const auto& point_ptr : polygon_2d.point_ptrs_) 
+        content << *point_ptr << "-- ";
+
+      content << "cycle;"
+        << std::endl;
+    }
 
     // and then the outline
-
+      for(const auto& line_segment_ptr : polygon_2d.line_segment_ptrs_)
+        addLineSegment(*line_segment_ptr);
   }
 
   void TikzPlotter::addLineSegment(const LineSegment2D &line_segment_2d) {
@@ -27,7 +49,6 @@ namespace vectorgraphics
         style_ptr->applyStyle(style_map);
       }
     }
-
 
     // add the line based on style_map final state
     if(style_map.find("draw") != style_map.end() || style_map.find("fill") != style_map.end()) {

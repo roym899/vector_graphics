@@ -17,6 +17,7 @@ namespace vectorgraphics {
 
   class Primitive {
   public:
+    void addStyle(StylePtr style_ptr);
     std::vector<FlagPtr> flag_ptrs;
     std::vector<StylePtr> style_ptrs;
     std::vector<PrimitivePtr> sub_primitive_ptrs_;

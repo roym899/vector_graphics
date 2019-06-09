@@ -22,16 +22,23 @@ int main() {
   // First create the primitives
   // three points with different colors
   vg::Point2D p1(0,0), p2(2,0), p3(0,2);
-  p1.style_ptrs.push_back(std::make_shared<vg::Style>(vg::StyleMap{{"draw","red"},{"fill","red"},{"radius","1pt"}}));
-  p2.style_ptrs.push_back(std::make_shared<vg::Style>(vg::StyleMap{{"draw","blue"},{"fill","blue"},{"radius","1pt"}}));
-  p3.style_ptrs.push_back(std::make_shared<vg::Style>(vg::StyleMap{{"draw","green"},{"fill","green"},{"radius","1pt"}}));
+  p1.addStyle(std::make_shared<vg::Style>(vg::StyleMap{{"draw","red"},{"fill","red"},{"radius","1pt"}}));
+  p2.addStyle(std::make_shared<vg::Style>(vg::StyleMap{{"draw","blue"},{"fill","blue"},{"radius","1pt"}}));
+  p3.addStyle(std::make_shared<vg::Style>(vg::StyleMap{{"draw","green"},{"fill","green"},{"radius","1pt"}}));
 
   // a dashed line segment
   vg::LineSegment2D line1(0.25,0.25,0.75,0.75);
-  line1.style_ptrs.push_back(std::make_shared<vg::Style>(vg::StyleMap{{"draw","red"},{"*line_path","dashed"}}));
+  line1.addStyle(std::make_shared<vg::Style>(vg::StyleMap{{"draw","red"},{"*line_path","dashed"}}));
+
+  // a filled rectangle
+  vg::Polygon2D poly1({-1.,-1.,3.,-1.,3.,3.,-1.,3.});
+  poly1.addStyle(std::make_shared<vg::Style>(vg::StyleMap{{"draw","black"},{"fill","black"},{"fill opacity","0.3"},{"line width", "2pt"}}));
+  poly1.addStyleToLineSegments(std::make_shared<vg::Style>(vg::StyleMap{{"draw", "red"},{"*line_path", "dashed"}}));
+  poly1.addStyleToPoints(std::make_shared<vg::Style>(vg::StyleMap{{"draw", "green"},{"fill", "green"},{"radius", "0.1"}}));
 
   // Create the file
   vg::TikzPlotter tp;
+  tp.addPolygon(poly1);
   tp.addPoint(p1);
   tp.addPoint(p2);
   tp.addPoint(p3);
