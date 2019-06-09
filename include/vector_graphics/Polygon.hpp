@@ -28,6 +28,8 @@ namespace vectorgraphics {
   public:
     Polygon3D(std::vector<double> coordinates);
     Polygon3D(std::vector<Point3DPtr> point_ptrs);
+    void addStyleToLineSegments(StylePtr style_ptr);
+    void addStyleToPoints(StylePtr style_ptr);
     std::vector<LineSegment3DPtr> line_segment_ptrs_;
     std::vector<Point3DPtr> point_ptrs_;
   };

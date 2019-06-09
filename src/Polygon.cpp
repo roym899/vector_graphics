@@ -63,4 +63,16 @@ namespace vectorgraphics {
     }
     line_segment_ptrs_.push_back(std::make_shared<LineSegment3D>(point_ptrs_[index-1], point_ptrs_[0]));
   }
+
+  void Polygon3D::addStyleToLineSegments(StylePtr style_ptr) {
+    for(const auto& line_segment_ptr : line_segment_ptrs_) {
+      line_segment_ptr->addStyle(style_ptr);
+    }
+  }
+
+  void Polygon3D::addStyleToPoints(StylePtr style_ptr) {
+    for(const auto& point_ptr : point_ptrs_) {
+      point_ptr->addStyle(style_ptr);
+    }
+  }
 }
